@@ -1,0 +1,43 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<header class="border-b border-line py-5">
+  <div class="mx-auto flex max-w-2xl items-center justify-between px-6">
+    <div class="flex items-center gap-2.5">
+      <img
+        src="/assets/logo-andres-coock.webp"
+        alt={product.seller.name}
+        width="32"
+        height="32"
+        class="h-8 w-8"
+      />
+      <span class="font-heading text-sm font-semibold text-ink">{product.seller.name}</span>
+    </div>
+
+    <span class="inline-flex items-center gap-1.5 font-mono text-xs text-ink-faint">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="h-3.5 w-3.5 text-live"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2Zm10-10V7a4 4 0 1 0-8 0v3h8Z"
+        />
+      </svg>
+      Compra segura
+    </span>
+  </div>
+</header>

@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import ProblemSection from "../components/ProblemSection.astro";
+import FeatureChecklist from "../components/FeatureChecklist.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import PricingCTA from "../components/PricingCTA.astro";
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+import { featuredProduct as product } from "../data/products";
+---
+
+<Layout title={product.title} description={product.metaDescription}>
+  <Header product={product} />
+  <main id="main-content">
+    <Hero product={product} />
+    <ProblemSection problems={product.problems} />
+    <FeatureChecklist features={product.features} />
+    <HowItWorks steps={product.howItWorks} />
+    <PricingCTA product={product} />
+    <FAQ faqs={product.faqs} />
+  </main>
+  <Footer product={product} />
+</Layout>

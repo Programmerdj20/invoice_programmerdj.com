@@ -1,0 +1,52 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary";
+  size?: "md" | "lg";
+  class?: string;
+}
+
+const { href, label, variant = "primary", size = "md", class: className = "" } = Astro.props;
+
+const isExternal = href.startsWith("http");
+
+const sizeClasses = {
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-8 py-4 text-base",
+};
+
+const variantClasses = {
+  primary:
+    "bg-gradient-to-r from-accent to-accent-dark text-canvas shadow-glow-sm hover:shadow-glow hover:-translate-y-0.5",
+  secondary:
+    "border border-line bg-transparent text-ink hover:border-accent hover:bg-accent-glow",
+};
+---
+
+<a
+  href={href}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener" : undefined}
+  class:list={[
+    "inline-flex items-center justify-center gap-2 rounded-full font-heading font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2",
+    sizeClasses[size],
+    variantClasses[variant],
+    className,
+  ]}
+>
+  {label}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    class="h-4 w-4"
+    aria-hidden="true"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M5.22 14.78a.75.75 0 0 1 0-1.06L12.94 6H7.75a.75.75 0 0 1 0-1.5h7a.75.75 0 0 1 .75.75v7a.75.75 0 0 1-1.5 0V6.06l-7.72 7.72a.75.75 0 0 1-1.06 0Z"
+      clip-rule="evenodd"
+    ></path>
+  </svg>
+</a>

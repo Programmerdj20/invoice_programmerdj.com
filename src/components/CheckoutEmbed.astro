@@ -1,0 +1,59 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<section aria-labelledby="pago-heading" class="relative overflow-hidden rounded-2xl border border-line bg-card">
+  <div class="flex items-center justify-between border-b border-line px-6 py-4">
+    <h2 id="pago-heading" class="text-sm font-semibold text-ink">Datos de pago</h2>
+    <span class="font-mono text-[11px] text-ink-faint">Tarjeta · PayPal</span>
+  </div>
+
+  <div class="relative">
+    <div
+      id="checkout-skeleton"
+      class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-card"
+    >
+      <span
+        class="motion-reduce:animate-none h-8 w-8 animate-spin rounded-full border-2 border-line-strong border-t-accent"
+        aria-hidden="true"
+      ></span>
+      <span class="font-mono text-xs text-ink-faint">Cargando formulario de pago…</span>
+    </div>
+
+    <iframe
+      id="checkout-iframe"
+      src={product.checkoutEmbedUrl}
+      title="Formulario de pago seguro de Hotmart"
+      class="h-[760px] w-full sm:h-[800px]"
+      style="border: 0;"
+      loading="eager"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+
+  <div class="border-t border-line px-6 py-3.5 text-center">
+    <a
+      href={product.checkoutEmbedUrl}
+      target="_blank"
+      rel="noopener"
+      class="font-mono text-xs text-ink-faint transition-colors hover:text-accent"
+    >
+      ¿No ves el formulario de pago? Ábrelo en una pestaña nueva
+    </a>
+  </div>
+</section>
+
+<script>
+  const iframe = document.getElementById("checkout-iframe");
+  const skeleton = document.getElementById("checkout-skeleton");
+
+  iframe?.addEventListener("load", () => {
+    skeleton?.remove();
+  });
+</script>

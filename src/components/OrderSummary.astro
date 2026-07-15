@@ -1,0 +1,56 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<section aria-labelledby="resumen-heading" class="rounded-2xl border border-line bg-card p-6 sm:p-7">
+  <span class="font-mono text-xs uppercase tracking-widest text-accent">Resumen de tu pedido</span>
+
+  <h1 id="resumen-heading" class="mt-2 text-xl font-semibold text-ink sm:text-2xl">
+    {product.title}
+  </h1>
+  <p class="mt-1.5 text-sm text-ink-soft">{product.tagline}</p>
+
+  <ul class="mt-5 space-y-2.5 border-t border-line pt-5">
+    {
+      product.includes.map((item) => (
+        <li class="flex items-start gap-2.5 text-sm text-ink-soft">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="mt-0.5 h-4 w-4 shrink-0 text-live"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mt-5 flex items-start gap-2 border-t border-line pt-4 text-xs text-ink-faint">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      class="mt-0.5 h-3.5 w-3.5 shrink-0"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    </svg>
+    Este producto se vende en todo el mundo — el precio final se calcula automáticamente en tu moneda local en el paso de pago.
+  </p>
+</section>

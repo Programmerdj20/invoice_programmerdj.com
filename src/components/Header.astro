@@ -1,0 +1,60 @@
+---
+import CtaButton from "./CtaButton.astro";
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-300"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="#main-content" class="flex items-center gap-2.5">
+      <img
+        src="/assets/logo-andres-coock.webp"
+        alt="Andres Coock — Fullstack Developer"
+        width="36"
+        height="36"
+        class="h-9 w-9"
+      />
+      <span class="font-heading text-sm font-semibold tracking-wide text-ink">
+        Andres Coock
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex">
+      <a href="#como-funciona" class="text-sm text-ink-soft transition-colors hover:text-ink">
+        Cómo funciona
+      </a>
+      <a href="#precio" class="text-sm text-ink-soft transition-colors hover:text-ink">
+        Precio
+      </a>
+      <a href="#faq" class="text-sm text-ink-soft transition-colors hover:text-ink">
+        Preguntas
+      </a>
+    </nav>
+
+    <CtaButton href="/" label="Contratar" variant="secondary" size="md" />
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+
+  const updateHeaderStyle = () => {
+    if (!header) return;
+    if (window.scrollY > 40) {
+      header.classList.add("bg-canvas/80", "backdrop-blur-md", "border-line");
+    } else {
+      header.classList.remove("bg-canvas/80", "backdrop-blur-md", "border-line");
+    }
+  };
+
+  updateHeaderStyle();
+  window.addEventListener("scroll", updateHeaderStyle, { passive: true });
+</script>

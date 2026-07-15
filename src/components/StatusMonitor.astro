@@ -1,0 +1,69 @@
+---
+import type { StatusMetric } from "../data/products";
+
+interface Props {
+  siteLabel: string;
+  metrics: StatusMetric[];
+}
+
+const { siteLabel, metrics } = Astro.props;
+
+const statusColor: Record<StatusMetric["status"], string> = {
+  ok: "text-live",
+  warn: "text-accent-light",
+  error: "text-red-400",
+};
+---
+
+<div
+  class="w-full max-w-md rounded-2xl border border-line bg-card/70 shadow-2xl shadow-black/40 backdrop-blur-md"
+>
+  <div class="flex items-center gap-2 border-b border-line px-5 py-3.5">
+    <span class="h-2.5 w-2.5 rounded-full bg-line-strong"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-line-strong"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-line-strong"></span>
+    <span class="ml-2 font-mono text-xs text-ink-faint">{siteLabel}</span>
+  </div>
+
+  <div class="flex items-center gap-2.5 px-5 pt-4">
+    <span class="relative flex h-2.5 w-2.5">
+      <span
+        class="motion-reduce:animate-none absolute inline-flex h-full w-full animate-pulse-live rounded-full bg-live"
+      ></span>
+      <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-live"></span>
+    </span>
+    <span class="font-mono text-xs font-medium tracking-wide text-live">OPERATIVO</span>
+    <span class="font-mono text-[11px] text-ink-faint" id="status-timestamp">
+      · verificado hace instantes
+    </span>
+  </div>
+
+  <dl class="grid grid-cols-1 gap-y-3 px-5 py-5 sm:grid-cols-2">
+    {
+      metrics.map((metric) => (
+        <div class="flex flex-col gap-0.5">
+          <dt class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">
+            {metric.label}
+          </dt>
+          <dd class={`font-mono text-sm font-medium ${statusColor[metric.status]}`}>
+            {metric.value}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+<script>
+  const timestampEl = document.getElementById("status-timestamp");
+  if (timestampEl) {
+    let seconds = 0;
+    setInterval(() => {
+      seconds += 4;
+      timestampEl.textContent =
+        seconds < 60
+          ? `· verificado hace ${seconds}s`
+          : `· verificado hace ${Math.floor(seconds / 60)} min`;
+    }, 4000);
+  }
+</script>

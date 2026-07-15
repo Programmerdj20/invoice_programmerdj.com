@@ -1,0 +1,47 @@
+---
+import type { CopySection } from "../data/products";
+
+interface Props {
+  problems: CopySection[];
+}
+
+const { problems } = Astro.props;
+---
+
+<section aria-labelledby="problemas-heading" class="border-t border-line bg-canvas-soft py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="animate-on-scroll max-w-2xl">
+      <span class="font-mono text-xs uppercase tracking-widest text-accent">El riesgo real</span>
+      <h2 id="problemas-heading" class="mt-3 text-3xl sm:text-4xl">
+        Lo que pasa cuando nadie cuida tu WordPress
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        problems.map((problem, index) => (
+          <div
+            class="animate-on-scroll rounded-2xl border border-line bg-card p-6"
+            style={`transition-delay: ${index * 80}ms`}
+          >
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-glow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="h-5 w-5 text-accent"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" d="M12 9v4m0 4h.01M10.29 3.86l-8.4 14.55A1.5 1.5 0 0 0 3.2 20.6h17.6a1.5 1.5 0 0 0 1.31-2.19l-8.4-14.55a1.5 1.5 0 0 0-2.62 0Z" />
+              </svg>
+            </div>
+            <h3 class="mt-4 text-base font-semibold text-ink">{problem.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{problem.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

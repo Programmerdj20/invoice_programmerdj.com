@@ -1,0 +1,83 @@
+---
+import CtaButton from "./CtaButton.astro";
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: product.currency,
+  maximumFractionDigits: 0,
+}).format(product.price);
+---
+
+<section id="precio" aria-labelledby="precio-heading" class="py-24">
+  <div class="mx-auto max-w-2xl px-6">
+    <div
+      class="animate-on-scroll relative overflow-hidden rounded-3xl border border-line-strong bg-card p-8 text-center sm:p-12"
+    >
+      <div
+        class="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-accent-glow blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative">
+        <h2 id="precio-heading" class="font-mono text-xs uppercase tracking-widest text-accent">
+          Plan de mantenimiento
+        </h2>
+
+        <p class="mt-5 flex items-end justify-center gap-1 font-heading">
+          <span class="text-5xl font-bold text-ink sm:text-6xl">{formattedPrice}</span>
+          <span class="pb-1.5 text-ink-faint">COP / mes</span>
+        </p>
+
+        <ul class="mx-auto mt-8 max-w-sm space-y-3 text-left">
+          {
+            product.includes.map((item) => (
+              <li class="flex items-start gap-3 text-sm text-ink-soft">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="mt-0.5 h-4 w-4 shrink-0 text-live"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-9">
+          <CtaButton href="/" label="Contratar ahora" size="lg" class="w-full sm:w-auto" />
+        </div>
+
+        <p class="mt-5 flex items-center justify-center gap-1.5 font-mono text-xs text-ink-faint">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-3.5 w-3.5"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2Zm10-10V7a4 4 0 1 0-8 0v3h8Z" />
+          </svg>
+          Pago 100% seguro procesado por Hotmart · Tarjeta o PayPal
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

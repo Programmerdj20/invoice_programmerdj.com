@@ -1,0 +1,16 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line py-6 text-center">
+  <p class="font-mono text-xs text-ink-faint">
+    © {year} {product.seller.name} · Pago procesado de forma segura por Hotmart
+  </p>
+</footer>

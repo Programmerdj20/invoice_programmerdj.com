@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CheckoutHeader from "../components/CheckoutHeader.astro";
+import CtaButton from "../components/CtaButton.astro";
+import MinimalFooter from "../components/MinimalFooter.astro";
+import { featuredProduct as product, buildWhatsappUrl } from "../data/products";
+
+const whatsappUrl = buildWhatsappUrl(
+  product.seller.whatsappPhone,
+  "Acabo de adquirir el plan de un mes, te comparto el comprobante."
+);
+---
+
+<Layout title={`¡Pago exitoso! — ${product.title}`} description={product.metaDescription} noindex>
+  <CheckoutHeader product={product} />
+
+  <main id="main-content" class="mx-auto flex max-w-xl flex-col items-center px-6 py-16 text-center sm:py-24">
+    <span class="flex h-14 w-14 items-center justify-center rounded-full bg-live/15">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="h-7 w-7 text-live"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+      </svg>
+    </span>
+
+    <h1 class="mt-6 text-3xl sm:text-4xl">¡Pago recibido!</h1>
+    <p class="mt-4 max-w-md text-ink-soft">
+      Gracias por confiar en {product.seller.name}. Para activar tu soporte de inmediato,
+      envíanos el comprobante de pago por WhatsApp.
+    </p>
+
+    <div class="mt-8">
+      <CtaButton href={whatsappUrl} label="Enviar comprobante por WhatsApp" size="lg" />
+    </div>
+
+    <p class="mt-6 font-mono text-xs text-ink-faint">
+      Te contactamos en menos de 24 horas después de recibir tu comprobante.
+    </p>
+  </main>
+
+  <MinimalFooter product={product} />
+
+  <script>
+    if (window.top !== window.self) {
+      window.top!.location.href = window.location.href;
+    }
+  </script>
+</Layout>
