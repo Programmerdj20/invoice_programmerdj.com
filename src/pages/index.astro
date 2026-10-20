@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CheckoutHeader from "../components/CheckoutHeader.astro";
-import OrderSummary from "../components/OrderSummary.astro";
 import CheckoutEmbed from "../components/CheckoutEmbed.astro";
 import MinimalFooter from "../components/MinimalFooter.astro";
 import { featuredProduct as product } from "../data/products";
@@ -13,7 +12,6 @@ import { featuredProduct as product } from "../data/products";
   <main id="main-content" class="mx-auto max-w-2xl px-6 py-10 sm:py-14">
     <div class="space-y-6">
       <CheckoutEmbed product={product} />
-      <OrderSummary product={product} />
     </div>
   </main>
 

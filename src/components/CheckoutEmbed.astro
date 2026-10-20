@@ -10,7 +10,7 @@ const { product } = Astro.props;
 
 <section aria-labelledby="pago-heading" class="relative overflow-hidden rounded-2xl border border-line bg-card">
   <div class="flex items-center justify-between border-b border-line px-6 py-4">
-    <h2 id="pago-heading" class="text-sm font-semibold text-ink">Datos de pago</h2>
+    <h1 id="pago-heading" class="text-sm font-semibold text-ink">Datos de pago</h1>
     <span class="font-mono text-[11px] text-ink-faint">Tarjeta · PayPal</span>
   </div>
 
@@ -28,7 +28,6 @@ const { product } = Astro.props;
 
     <iframe
       id="checkout-iframe"
-      src={product.checkoutEmbedUrl}
       title="Formulario de pago seguro de Hotmart"
       class="h-[760px] w-full sm:h-[800px]"
       style="border: 0;"
@@ -39,6 +38,7 @@ const { product } = Astro.props;
 
   <div class="border-t border-line px-6 py-3.5 text-center">
     <a
+      id="checkout-fallback"
       href={product.checkoutEmbedUrl}
       target="_blank"
       rel="noopener"
@@ -49,11 +49,23 @@ const { product } = Astro.props;
   </div>
 </section>
 
-<script>
+<noscript>
+  <p class="px-6 py-4 text-center text-sm text-ink-soft">
+    Activa JavaScript o <a class="underline" href={product.checkoutEmbedUrl} target="_blank" rel="noopener">abre el pago en una pestaña nueva</a>.
+  </p>
+</noscript>
+
+<script define:vars={{ planEmbedUrls: product.planEmbedUrls, fallbackUrl: product.checkoutEmbedUrl }}>
   const iframe = document.getElementById("checkout-iframe");
   const skeleton = document.getElementById("checkout-skeleton");
+  const fallbackLink = document.getElementById("checkout-fallback");
+
+  const plan = new URLSearchParams(window.location.search).get("plan");
+  const url = (plan && Object.hasOwn(planEmbedUrls, plan) && planEmbedUrls[plan]) || fallbackUrl;
 
   iframe?.addEventListener("load", () => {
     skeleton?.remove();
   });
+  if (iframe) iframe.src = url;
+  if (fallbackLink) fallbackLink.href = url;
 </script>
