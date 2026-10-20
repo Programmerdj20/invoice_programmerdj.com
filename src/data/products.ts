@@ -68,7 +68,7 @@ export function buildWhatsappUrl(phone: string, message: string): string {
 export const products: Product[] = [
   {
     slug: "soporte-wordpress",
-    title: "Soporte Técnico WordPress: Estabilidad y Seguridad para tu Sitio Web",
+    title: "Soporte Xuper para tu app siempre Online: Estabilidad y Seguridad",
     tagline: "Mantenimiento y seguridad para WordPress",
     metaDescription:
       "Soporte técnico mensual para tu sitio en WordPress: actualizaciones, backups diarios, monitoreo de seguridad 24/7 y respuesta rápida ante caídas. Desde $34.132 COP/mes.",
