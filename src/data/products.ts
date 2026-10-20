@@ -83,6 +83,7 @@ export const products: Product[] = [
       "3-meses": "https://pay.hotmart.com/R106662873M?off=97omi388",
       "6-meses": "https://pay.hotmart.com/R106662873M?off=6c5cr2hg",
       "12-meses": "https://pay.hotmart.com/R106662873M?off=nszpwqgz",
+      "black-friday-12-meses": "https://pay.hotmart.com/R106662873M?off=j772xo48",
     },
 
     heroBadge: "Monitoreo activo 24/7",
