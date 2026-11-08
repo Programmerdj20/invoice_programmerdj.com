@@ -9,15 +9,17 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "deploy": "pnpm run build && wrangler pages deploy dist --project-name invoice-programmerdj --branch main"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.1.0",
-    "tailwindcss": "^4.0.0",
-    "@tailwindcss/vite": "^4.0.0"
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "wrangler": "^4.151.3"
   }
 }
